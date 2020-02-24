@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 KEYS = {
     'a': 'w',
     'b': 'E',
@@ -69,18 +70,42 @@ KEYS = {
 }
 
 def cypher(message):
-    pass
+    words = message.split(' ')
+    cypher_message = []
+
+    for word in words:
+        cypher_word = ''
+        for letter in word:
+            cypher_word += KEYS[letter]
+
+        cypher_message.append(cypher_word)
+
+    return ' '.join(cypher_message)
 
 
 def decipher(message):
-    pass
+    words = message.split(' ')
+    decipher_message = []
+
+    for word in words:
+        decipher_word = ''
+
+        for letter in word:
+
+            for key, value in KEYS.iteritems():
+                if value == letter:
+                    decipher_word += key
+
+        decipher_message.append(decipher_word)
+
+    return ' '.join(decipher_message)
 
 
 def run():
 
     while True:
 
-        command = str(= raw_input('''--- * --- * --- * --- * --- * --- * --- * ---
+        command = str(raw_input('''--- * --- * --- * --- * --- * --- * --- * ---
 
             Bienvenido a criptografía. ¿Qué deseas hacer?
 
@@ -90,9 +115,14 @@ def run():
         '''))
 
         if command == 'c':
-            print('cifrar')
+            message = str(raw_input('Escribe tu mensaje: '))
+            cypher_message = cypher(message)
+            print(cypher_message)
+
         elif command == 'd':
-            print('decifrar')
+            message = str(raw_input('Escribe tu mensaje tu cifrado: '))
+            decypher_message = decipher(message)
+            print(decypher_message)
         elif command == 's':
             print('salir')
         else:
